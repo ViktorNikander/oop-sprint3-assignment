@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//add comment in main
 public class FifteenGame extends JFrame implements ActionListener {
     JPanel base = new JPanel(new BorderLayout());
     JPanel header = new JPanel();
