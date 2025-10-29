@@ -15,6 +15,7 @@ public class FifteenGame extends JFrame implements ActionListener {
     List<JLabel> labelList = new ArrayList<>();
     boolean win = false;
     JButton buttonPressed;
+    int indexOfEmptyLabel;
 
     FifteenGame(){
         add(base);
@@ -24,7 +25,9 @@ public class FifteenGame extends JFrame implements ActionListener {
         newGame.addActionListener(this);
         header.add(winLabel);
 
-        for (int i = 0; i < 16; i++) {
+        labelList.add(createLabel());
+
+        for (int i = 1; i <= 16; i++) {
             labelList.add(createLabel());
             body.add(labelList.get(i));
         }
@@ -69,5 +72,9 @@ public class FifteenGame extends JFrame implements ActionListener {
         System.out.println(buttonPressed.getText() + " text from button");
         JLabel labelContainingButton = (JLabel) buttonPressed.getParent();
         System.out.println(labelList.indexOf(labelContainingButton) + " index of label");
+        if (buttonPressed.getText().equals("1")){
+            labelContainingButton.remove(buttonPressed);
+        }
+        repaint();
     }
 }
