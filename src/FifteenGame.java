@@ -10,7 +10,11 @@ public class FifteenGame extends JFrame implements ActionListener {
     JPanel header = new JPanel();
     JPanel body = new JPanel(new GridLayout(4, 4));
     JButton newGame = new JButton("New game");
+    JLabel winLabel = new JLabel("You won");
     List<JButton> buttonList = new ArrayList<>();
+    List<JLabel> labelList = new ArrayList<>();
+    boolean win = false;
+    JButton buttonPressed;
 
     FifteenGame(){
         add(base);
@@ -18,17 +22,29 @@ public class FifteenGame extends JFrame implements ActionListener {
         base.add(body, BorderLayout.CENTER);
         header.add(newGame);
         newGame.addActionListener(this);
+        header.add(winLabel);
+
+        for (int i = 0; i < 16; i++) {
+            labelList.add(createLabel());
+            body.add(labelList.get(i));
+        }
 
         buttonList.add(createButton(""));
 
         for (int i = 1; i < 16; i++) {
             buttonList.add(createButton(String.valueOf(i)));
-            body.add(buttonList.get(i));
+            labelList.get(i).add(buttonList.get(i));
         }
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
         setSize(500, 500);
+        setResizable(false);
+    }
+
+    private JLabel createLabel(){
+        JLabel label = new JLabel();
+        return label;
     }
 
     private JButton createButton(String text){
@@ -49,11 +65,9 @@ public class FifteenGame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == buttonList.get(1)){
-            System.out.println("working");
-        }
-        if (e.getSource() == newGame){
-            System.out.println("new game created");
-        }
+        buttonPressed = (JButton) e.getSource();
+        System.out.println(buttonPressed.getText() + " text from button");
+        JLabel labelContainingButton = (JLabel) buttonPressed.getParent();
+        System.out.println(labelList.indexOf(labelContainingButton) + " index of label");
     }
 }
