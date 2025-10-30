@@ -49,31 +49,27 @@ public class FifteenGame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         buttonPressed = (JButton) e.getSource();
-        System.out.println(buttonPressed.getText() + " text from button");
+        System.out.println("button: " + buttonPressed.getText());
         JLabel labelContainingButton = (JLabel) buttonPressed.getParent();
-        System.out.println(labelList.indexOf(labelContainingButton) + " index of label");
-        if (buttonPressed.getText().equals("1")){
-            labelContainingButton.remove(buttonPressed);
-            labelList.get(indexOfEmptyLabel).add(buttonPressed);
-            indexOfEmptyLabel = labelList.indexOf(labelContainingButton);
-        }
-        System.out.println(indexOfEmptyLabel);
-        System.out.println(isMoveable(labelContainingButton));
-        repaint();
+        System.out.println("label pressed: " + labelList.indexOf(labelContainingButton));
+        System.out.println("empty label: " + indexOfEmptyLabel);
+        System.out.println("is moveable: " + isMoveable(labelContainingButton));
+        moveTiles(labelContainingButton, buttonPressed);
+        System.out.println("---------------");
     }
 
     private void moveTiles(JLabel labelContainingButton, JButton buttonPressed){
-        if (true){
+        if (isMoveable(labelContainingButton)){
             labelList.get(indexOfEmptyLabel).add(buttonPressed);
             labelContainingButton.remove(buttonPressed);
             indexOfEmptyLabel = labelList.indexOf(labelContainingButton);
+            repaint();
         }
     }
 
     private boolean isMoveable(JLabel labelContainingButton){
         validTilesForMoving();
         int tileWantingToMove = labelList.indexOf(labelContainingButton);
-        System.out.println(tileWantingToMove + " tile number wanting to move");
         for (int number : validTilesForMoving){
             if (tileWantingToMove == number){
                 return true;
