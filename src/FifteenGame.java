@@ -66,6 +66,12 @@ public class FifteenGame extends JFrame implements ActionListener {
         }
     }
 
+    private boolean isMoveable(JButton buttonPressed){
+        int[] validTilesForMoving; //TODO add method for returning valid tiles based on empty label
+
+        return true;
+    }
+
     private JButton createButton(String text){
         JButton button = new JButton(text);
 
