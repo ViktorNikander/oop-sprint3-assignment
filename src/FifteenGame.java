@@ -34,7 +34,7 @@ public class FifteenGame extends JFrame implements ActionListener {
         for (int i = 1; i < 16; i++) {
             buttonList.add(createButton(String.valueOf(i)));
         }
-        Collections.shuffle(buttonList.subList(1, buttonList.size()));
+        Collections.shuffle(buttonList.subList(1, buttonList.size())); //Comment out to create a winning game
         for (int i = 1; i < 16; i++) {
             labelList.get(i).add(buttonList.get(i));
         }
