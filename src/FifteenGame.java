@@ -56,7 +56,7 @@ public class FifteenGame extends JFrame implements ActionListener {
         }
     }
     private void createNewGame(){
-        for (JButton button : buttonList){
+        for (JButton button : buttonList.subList(1, buttonList.size())){
             JLabel label = (JLabel) button.getParent();
             label.remove(button);
             Collections.shuffle(buttonList.subList(1, buttonList.size()));
