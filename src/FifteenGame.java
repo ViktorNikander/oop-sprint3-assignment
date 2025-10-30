@@ -59,8 +59,13 @@ public class FifteenGame extends JFrame implements ActionListener {
         for (JButton button : buttonList){
             JLabel label = (JLabel) button.getParent();
             label.remove(button);
-            Collections.shuffle(buttonList);
+            Collections.shuffle(buttonList.subList(1, buttonList.size()));
+            for (int i = 1; i < 16; i++) {
+                labelList.get(i).add(buttonList.get(i));
+            }
         }
+        revalidate();
+        repaint();
     }
     private void checkWin() {
         for (JButton button : buttonList){
