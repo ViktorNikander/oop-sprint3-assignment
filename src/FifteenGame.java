@@ -45,9 +45,19 @@ public class FifteenGame extends JFrame implements ActionListener {
         setResizable(false);
     }
 
-    private JLabel createLabel(){
-        JLabel label = new JLabel();
-        return label;
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        buttonPressed = (JButton) e.getSource();
+        System.out.println(buttonPressed.getText() + " text from button");
+        JLabel labelContainingButton = (JLabel) buttonPressed.getParent();
+        System.out.println(labelList.indexOf(labelContainingButton) + " index of label");
+        if (buttonPressed.getText().equals("1")){
+            labelContainingButton.remove(buttonPressed);
+            labelList.get(indexOfEmptyLabel).add(buttonPressed);
+            indexOfEmptyLabel = labelList.indexOf(labelContainingButton);
+        }
+        System.out.println(indexOfEmptyLabel);
+        repaint();
     }
 
     private JButton createButton(String text){
@@ -66,18 +76,8 @@ public class FifteenGame extends JFrame implements ActionListener {
         FifteenGame game = new FifteenGame();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        buttonPressed = (JButton) e.getSource();
-        System.out.println(buttonPressed.getText() + " text from button");
-        JLabel labelContainingButton = (JLabel) buttonPressed.getParent();
-        System.out.println(labelList.indexOf(labelContainingButton) + " index of label");
-        if (buttonPressed.getText().equals("1")){
-            labelContainingButton.remove(buttonPressed);
-            labelList.get(indexOfEmptyLabel).add(buttonPressed);
-            indexOfEmptyLabel = labelList.indexOf(labelContainingButton);
-        }
-        System.out.println(indexOfEmptyLabel);
-        repaint();
+    private JLabel createLabel(){
+        JLabel label = new JLabel();
+        return label;
     }
 }
