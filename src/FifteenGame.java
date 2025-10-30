@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FifteenGame extends JFrame implements ActionListener {
@@ -32,6 +33,9 @@ public class FifteenGame extends JFrame implements ActionListener {
         buttonList.add(createButton(""));
         for (int i = 1; i < 16; i++) {
             buttonList.add(createButton(String.valueOf(i)));
+        }
+        Collections.shuffle(buttonList.subList(1, buttonList.size()));
+        for (int i = 1; i < 16; i++) {
             labelList.get(i).add(buttonList.get(i));
         }
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -42,10 +46,14 @@ public class FifteenGame extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        buttonPressed = (JButton) e.getSource();
-        JLabel labelContainingButton = (JLabel) buttonPressed.getParent();
-        moveTiles(labelContainingButton, buttonPressed);
-        checkWin();
+        if (e.getSource() == newGame){
+
+        }else {
+            buttonPressed = (JButton) e.getSource();
+            JLabel labelContainingButton = (JLabel) buttonPressed.getParent();
+            moveTiles(labelContainingButton, buttonPressed);
+            checkWin();
+        }
     }
     private void checkWin() {
         for (JButton button : buttonList){
@@ -70,6 +78,7 @@ public class FifteenGame extends JFrame implements ActionListener {
             labelList.get(indexOfEmptyLabel).add(buttonPressed);
             labelContainingButton.remove(buttonPressed);
             indexOfEmptyLabel = labelList.indexOf(labelContainingButton);
+            revalidate();
             repaint();
         }
     }
