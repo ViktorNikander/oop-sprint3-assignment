@@ -47,7 +47,7 @@ public class FifteenGame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newGame){
-
+            createNewGame();
         }else {
             buttonPressed = (JButton) e.getSource();
             JLabel labelContainingButton = (JLabel) buttonPressed.getParent();
