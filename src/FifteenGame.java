@@ -10,7 +10,7 @@ public class FifteenGame extends JFrame implements ActionListener {
     JPanel header = new JPanel();
     JPanel body = new JPanel(new GridLayout(4, 4));
     JButton newGame = new JButton("New game");
-    JLabel winLabel = new JLabel("You won");
+    JLabel winLabel = new JLabel();
     List<JButton> buttonList = new ArrayList<>();
     List<JLabel> labelList = new ArrayList<>();
     boolean win = false;
@@ -49,13 +49,28 @@ public class FifteenGame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         buttonPressed = (JButton) e.getSource();
-        System.out.println("button: " + buttonPressed.getText());
         JLabel labelContainingButton = (JLabel) buttonPressed.getParent();
-        System.out.println("label pressed: " + labelList.indexOf(labelContainingButton));
-        System.out.println("empty label: " + indexOfEmptyLabel);
-        System.out.println("is moveable: " + isMoveable(labelContainingButton));
         moveTiles(labelContainingButton, buttonPressed);
-        System.out.println("---------------");
+        checkWin();
+    }
+
+    private void checkWin() {
+        for (JButton button : buttonList){
+            if (buttonList.indexOf(button) == 0){ //Skips index 0 of list
+                continue;
+            }
+            win = true;
+            int placeholder = Integer.parseInt(button.getText());
+            if (placeholder != labelList.indexOf(button.getParent())){
+                win = false;
+                break;
+            }
+        }
+        if (win){
+            winLabel.setText("You won!");
+        }else {
+            winLabel.setText("");
+        }
     }
 
     private void moveTiles(JLabel labelContainingButton, JButton buttonPressed){
