@@ -17,7 +17,6 @@ public class FifteenGame extends JFrame implements ActionListener {
     JButton buttonPressed;
     int indexOfEmptyLabel = 16;
     int[] validTilesForMoving = new int[4];
-
     FifteenGame(){
         add(base);
         base.add(header, BorderLayout.NORTH);
@@ -25,16 +24,12 @@ public class FifteenGame extends JFrame implements ActionListener {
         header.add(newGame);
         newGame.addActionListener(this);
         header.add(winLabel);
-
         labelList.add(createLabel());
-
         for (int i = 1; i <= 16; i++) {
             labelList.add(createLabel());
             body.add(labelList.get(i));
         }
-
         buttonList.add(createButton(""));
-
         for (int i = 1; i < 16; i++) {
             buttonList.add(createButton(String.valueOf(i)));
             labelList.get(i).add(buttonList.get(i));
@@ -45,7 +40,6 @@ public class FifteenGame extends JFrame implements ActionListener {
         setSize(500, 500);
         setResizable(false);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         buttonPressed = (JButton) e.getSource();
@@ -53,7 +47,6 @@ public class FifteenGame extends JFrame implements ActionListener {
         moveTiles(labelContainingButton, buttonPressed);
         checkWin();
     }
-
     private void checkWin() {
         for (JButton button : buttonList){
             if (buttonList.indexOf(button) == 0){ //Skips index 0 of list
@@ -72,7 +65,6 @@ public class FifteenGame extends JFrame implements ActionListener {
             winLabel.setText("");
         }
     }
-
     private void moveTiles(JLabel labelContainingButton, JButton buttonPressed){
         if (isMoveable(labelContainingButton)){
             labelList.get(indexOfEmptyLabel).add(buttonPressed);
@@ -81,7 +73,6 @@ public class FifteenGame extends JFrame implements ActionListener {
             repaint();
         }
     }
-
     private boolean isMoveable(JLabel labelContainingButton){
         validTilesForMoving();
         int tileWantingToMove = labelList.indexOf(labelContainingButton);
@@ -92,7 +83,6 @@ public class FifteenGame extends JFrame implements ActionListener {
         }
         return false;
     }
-
     private int[] validTilesForMoving() {
         switch (indexOfEmptyLabel){
             case 1 -> {
@@ -212,26 +202,20 @@ public class FifteenGame extends JFrame implements ActionListener {
             }
         }
     }
-
     private JButton createButton(String text){
         JButton button = new JButton(text);
-
         button.setBackground(Color.red);
         button.setForeground(Color.white);
         button.setBorder(BorderFactory.createBevelBorder(1));
         button.setSize(100, 100);
         button.addActionListener(this);
-
         return button;
     }
-
     private JLabel createLabel(){
         JLabel label = new JLabel();
         return label;
     }
-
     public static void main(String[] args) {
         FifteenGame game = new FifteenGame();
     }
-
 }
