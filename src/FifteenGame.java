@@ -60,9 +60,11 @@ public class FifteenGame extends JFrame implements ActionListener {
         repaint();
     }
 
-    private void moveTiles(JButton buttonPressed){
-        if (true){ //TODO make true method for checking empty and pressed tile are next to each other
-
+    private void moveTiles(JLabel labelContainingButton, JButton buttonPressed){
+        if (true){
+            labelList.get(indexOfEmptyLabel).add(buttonPressed);
+            labelContainingButton.remove(buttonPressed);
+            indexOfEmptyLabel = labelList.indexOf(labelContainingButton);
         }
     }
 
