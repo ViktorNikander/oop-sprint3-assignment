@@ -60,6 +60,12 @@ public class FifteenGame extends JFrame implements ActionListener {
         repaint();
     }
 
+    private void moveTiles(JButton buttonPressed){
+        if (true){ //TODO make true method for checking empty and pressed tile are next to each other
+
+        }
+    }
+
     private JButton createButton(String text){
         JButton button = new JButton(text);
 
@@ -72,12 +78,13 @@ public class FifteenGame extends JFrame implements ActionListener {
         return button;
     }
 
-    public static void main(String[] args) {
-        FifteenGame game = new FifteenGame();
-    }
-
     private JLabel createLabel(){
         JLabel label = new JLabel();
         return label;
     }
+
+    public static void main(String[] args) {
+        FifteenGame game = new FifteenGame();
+    }
+
 }
