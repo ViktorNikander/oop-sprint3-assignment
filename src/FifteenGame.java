@@ -34,7 +34,6 @@ public class FifteenGame extends JFrame implements ActionListener {
             body.add(button);
         }
         indexOfEmptySpace = getIndexOfComponent(emptyButton);
-        System.out.println(indexOfEmptySpace);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
