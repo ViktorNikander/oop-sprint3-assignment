@@ -16,6 +16,7 @@ public class FifteenGame extends JFrame implements ActionListener {
     JButton emptyButton = new JButton();
     boolean win = false;
     JButton buttonPressed;
+    int indexOfEmptySpace;
 
     FifteenGame(){
         add(base);
@@ -32,9 +33,9 @@ public class FifteenGame extends JFrame implements ActionListener {
         Collections.shuffle(buttonList); //Comment out to create a winning game
         for (JButton button : buttonList){
             body.add(button);
-            if (button.getText() == null){
-            }
         }
+        indexOfEmptySpace = getIndexOfComponent(emptyButton);
+        System.out.println(indexOfEmptySpace);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -49,7 +50,7 @@ public class FifteenGame extends JFrame implements ActionListener {
             createNewGame();
         }else {
             buttonPressed = (JButton) e.getSource();
-//            moveTiles(buttonPressed);
+            moveTiles(buttonPressed);
             checkWin();
         }
     }
@@ -66,35 +67,49 @@ public class FifteenGame extends JFrame implements ActionListener {
         JButton testedButton;
         for (int i = 1; i < 16; i++) {
             testedButton = (JButton) body.getComponent(i - 1);
-            if (Integer.parseInt(testedButton.getText()) != i){
+            if (testedButton.getText().equals("") || Integer.parseInt(testedButton.getText()) != i){
                 winLabel.setText("");
                 return;
             }
         }
         winLabel.setText("You win");
     }
-//    private void moveTiles(JButton buttonPressed){
-//        if (isMoveable(buttonPressed)){
-//            System.out.println("can move");
-//            revalidate();
-//            repaint();
-//        }
-//    }
-//    private boolean isMoveable(JButton buttonPressed){
-//        Rectangle emptySpace =
-//        Rectangle pressedSpace = labelContainingButton.getBounds();
-//        if ((pressedSpace.getX() + pressedSpace.getWidth() == emptySpace.getX()) && pressedSpace.getY() == emptySpace.getY()) {
-//            return true;
-//        } else if (pressedSpace.getY() + pressedSpace.getHeight() == emptySpace.getY() && pressedSpace.getX() == emptySpace.getX()) {
-//            return true;
-//        } else if (pressedSpace.getX() == emptySpace.getX() + emptySpace.getWidth() && pressedSpace.getY() == emptySpace.getY()) {
-//            return true;
-//        } else if (pressedSpace.getY() == emptySpace.getY() + emptySpace.getHeight() && pressedSpace.getX() == emptySpace.getX()) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    private void moveTiles(JButton buttonPressed){
+        if (isMoveable(buttonPressed)){
+            int placeholder = getIndexOfComponent(buttonPressed);
+            body.add(buttonPressed, indexOfEmptySpace);
+            body.add(emptyButton, placeholder);
+            indexOfEmptySpace = placeholder;
+            revalidate();
+            repaint();
+        }
+    }
+
+    private int getIndexOfComponent(JButton buttonPressed) {
+        Component[] components = body.getComponents();
+        for (int i = 0; i < 16; i++) {
+            if (components[i] == buttonPressed){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private boolean isMoveable(JButton buttonPressed){
+        Rectangle emptySpace = body.getComponent(indexOfEmptySpace).getBounds();
+        Rectangle pressedSpace = buttonPressed.getBounds();
+        if ((pressedSpace.getX() + pressedSpace.getWidth() == emptySpace.getX()) && pressedSpace.getY() == emptySpace.getY()) {
+            return true;
+        } else if (pressedSpace.getY() + pressedSpace.getHeight() == emptySpace.getY() && pressedSpace.getX() == emptySpace.getX()) {
+            return true;
+        } else if (pressedSpace.getX() == emptySpace.getX() + emptySpace.getWidth() && pressedSpace.getY() == emptySpace.getY()) {
+            return true;
+        } else if (pressedSpace.getY() == emptySpace.getY() + emptySpace.getHeight() && pressedSpace.getX() == emptySpace.getX()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     private JButton createButton(String text){
         JButton button = new JButton(text);
         button.setBackground(Color.red);
