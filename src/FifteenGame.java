@@ -14,7 +14,6 @@ public class FifteenGame extends JFrame implements ActionListener {
     JLabel winLabel = new JLabel();
     List<JButton> buttonList = new ArrayList<>();
     JButton emptyButton = new JButton();
-    boolean win = false;
     JButton buttonPressed;
     int indexOfEmptySpace;
 
@@ -43,6 +42,7 @@ public class FifteenGame extends JFrame implements ActionListener {
         setSize(500, 500);
         setResizable(false);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         buttonPressed = (JButton) e.getSource();
@@ -54,6 +54,7 @@ public class FifteenGame extends JFrame implements ActionListener {
             checkWin();
         }
     }
+
     private void createNewGame(){
         body.removeAll();
         Collections.shuffle(buttonList);
@@ -63,6 +64,7 @@ public class FifteenGame extends JFrame implements ActionListener {
         revalidate();
         repaint();
     }
+
     private void checkWin() {
         JButton testedButton;
         for (int i = 1; i < 16; i++) {
@@ -74,6 +76,7 @@ public class FifteenGame extends JFrame implements ActionListener {
         }
         winLabel.setText("You win");
     }
+
     private void moveTiles(JButton buttonPressed){
         if (isMoveable(buttonPressed)){
             int placeholder = getIndexOfComponent(buttonPressed);
