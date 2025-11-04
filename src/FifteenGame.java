@@ -29,11 +29,7 @@ public class FifteenGame extends JFrame implements ActionListener {
             buttonList.add(createButton(String.valueOf(i)));
         }
         buttonList.add(emptyButton);
-        Collections.shuffle(buttonList); //Comment out to create a winning game
-        for (JButton button : buttonList){
-            body.add(button);
-        }
-        indexOfEmptySpace = getIndexOfComponent(emptyButton);
+        createNewGame();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -56,10 +52,11 @@ public class FifteenGame extends JFrame implements ActionListener {
 
     private void createNewGame(){
         body.removeAll();
-        Collections.shuffle(buttonList);
+        Collections.shuffle(buttonList); //comment out to create winning game
         for (JButton button : buttonList){
             body.add(button);
         }
+        indexOfEmptySpace = getIndexOfComponent(emptyButton);
         revalidate();
         repaint();
     }
