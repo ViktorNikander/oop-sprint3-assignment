@@ -35,7 +35,6 @@ public class FifteenGame extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
         setSize(500, 500);
-        setResizable(false);
     }
 
     @Override
