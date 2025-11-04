@@ -1,6 +1,0 @@
-1. Create JFrame
-2. Create Button class
-3. Create ActionListener
-4. Create logic for moving components
-5. Create logic for winning game
-6. Create reset for game
